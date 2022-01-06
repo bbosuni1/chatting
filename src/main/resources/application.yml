@@ -1,2 +1,7 @@
-kafka:
-  bootstrap-server: localhost:9092
+spring:
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092
+      group-id: chatting
+    producer:
+      bootstrap-servers: localhost:9092
