@@ -26,6 +26,7 @@ class KafkaProducerConfig {
         return KafkaTemplate(factory)
     }
 
+    @Bean
     fun producerConfigs(): Map<String, Serializable> =
         mapOf(
             ProducerConfig.BOOTSTRAP_SERVERS_CONFIG to bootstrapServer,
