@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>Chat</title>
+    <link type="text/css" rel="stylesheet" href="/css/chat.css"/>
+    <script src="/webjars/sockjs-client/1.1.1/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/2.3.4/stomp.min.js"></script>
+</head>
+<body>
+<div id="container" class="container">
+    <h1>chat</h1>
+    <div id="chating" class="chat">
+    </div>
+
+    <div id="authorDiv">
+        <table class="inputTable">
+            <tr>
+                <th>사용자 명</th>
+                <th><input type="text" name="author" id="author"></th>
+                <th>
+                    <button id="addAuthor">등록</button>
+                </th>
+            </tr>
+        </table>
+    </div>
+
+    <div id="msgDiv" style="display: none">
+        <table class="inputTable">
+            <tr>
+                <th>메시지</th>
+                <th><input id="text" placeholder="메시지를 입력하세요."></th>
+                <th>
+                    <button id="sendBtn">보내기</button>
+                </th>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+
+<script>
+    const wsUrl = 'http://localhost:8080/ws-chat'
+
+    document.addEventListener("DOMContentLoaded", function () {
+        connect()
+    });
+
+    function connect() {
+        const webSocket = new SockJS(wsUrl)
+        const stomp = Stomp.over(webSocket)
+
+        stomp.connect({}, function (){
+
+            stomp.subscribe("/topic/group", function (response) {
+                console.log(response)
+                const data = JSON.parse(response.body)
+                console.log(data)
+            })
+        })
+    }
+</script>

@@ -6,9 +6,9 @@ import java.time.LocalDateTime
 data class Message(
     @JsonProperty("author") val author: String?,
     @JsonProperty("text") val text: String?,
-    var timestamp: LocalDateTime?
+    @JsonProperty("timestamp") var timestamp: String?
 ) {
     fun createTimestamp() {
-        this.timestamp = LocalDateTime.now()
+        this.timestamp = LocalDateTime.now().toString()
     }
 }

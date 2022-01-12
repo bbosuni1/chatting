@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 
-
-const val KAFKA_TOPIC: String = "kafka-chat"
+const val KAFKA_TOPIC: String = "new-kafka-chat"
 
 @RestController
 class ChatController(
@@ -17,7 +16,7 @@ class ChatController(
 ) {
     val log: Logger = LoggerFactory.getLogger(ChatController::class.java)
 
-    @PostMapping("/api/send")
+    @PostMapping("/chat/send")
     fun sendMessage(@RequestBody message: Message) {
         message.createTimestamp()
         log.info("message : ${message.text}, auth : ${message.author}")
@@ -25,9 +24,4 @@ class ChatController(
         // post 요청으로 전달받은 메시지를 해당 카프카 토픽에 생산
     }
 
-//    @MessageMapping("/sendMessage")
-//    @SendTo("/topic/group")
-//    fun broadcastGroupMessage(@Payload message: Message?): Message? {
-//        return message
-//    }
 }

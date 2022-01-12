@@ -11,11 +11,11 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 class WebSocketConfig: WebSocketMessageBrokerConfigurer {
 
     override fun registerStompEndpoints(registry: StompEndpointRegistry) {
-        registry.addEndpoint("/ws/chat").withSockJS()
+        registry.addEndpoint("/ws-chat").withSockJS()
     }
 
     override fun configureMessageBroker(registry: MessageBrokerRegistry) {
-        registry.setApplicationDestinationPrefixes("/chat")
+        registry.setApplicationDestinationPrefixes("/app")
         registry.enableSimpleBroker("/topic")
     }
 }
